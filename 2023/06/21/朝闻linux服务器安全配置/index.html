@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="好不容易买了服务器，如果因为自己的疏忽，被黑客黑掉的话，那真的是太糟糕了！  下面告诉你一些简单的方法提高服务器的安全系数，我的云服务器就是这么配置的，虽然有些麻烦，但是感觉安心一些。 修改 ssh 登陆配置打开 ssh 配置文件 vim &#x2F;etc&#x2F;ssh&#x2F;sshd_config #修改以下几项Port 10000#更改SSH端口，最好改为10000以上，别人扫描到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="朝闻linux服务器安全配置">
+<meta property="og:url" content="https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="ToNewSun">
+<meta property="og:description" content="好不容易买了服务器，如果因为自己的疏忽，被黑客黑掉的话，那真的是太糟糕了！  下面告诉你一些简单的方法提高服务器的安全系数，我的云服务器就是这么配置的，虽然有些麻烦，但是感觉安心一些。 修改 ssh 登陆配置打开 ssh 配置文件 vim &#x2F;etc&#x2F;ssh&#x2F;sshd_config #修改以下几项Port 10000#更改SSH端口，最好改为10000以上，别人扫描到">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-20T23:00:09.000Z">
+<meta property="article:modified_time" content="2023-06-20T23:05:27.196Z">
+<meta property="article:author" content="jimm7">
+<meta property="article:tag" content="技术漫谈">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>朝闻linux服务器安全配置</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="ToNewSun" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/KngJmmy">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/06/20/%E6%89%80%E7%88%B1%E9%9A%94%E5%B1%B1%E6%B5%B7%EF%BC%8C%E5%B1%B1%E6%B5%B7%E7%9A%86%E5%8F%AF%E5%B9%B3/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&text=朝闻linux服务器安全配置"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&is_video=false&description=朝闻linux服务器安全配置"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=朝闻linux服务器安全配置&body=Check out this article: https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&name=朝闻linux服务器安全配置&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&t=朝闻linux服务器安全配置"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%88%A0%E9%99%A4%E7%9A%84%E5%A4%9A%E4%BD%99%E7%94%A8%E6%88%B7%E5%85%B1%E6%9C%89%EF%BC%9Async-shutdown-halt-uucp-operator-games-gopher"><span class="toc-number">1.</span> <span class="toc-text">需要删除的多余用户共有：sync shutdown halt uucp operator games gopher</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%88%A0%E9%99%A4%E7%9A%84%E5%A4%9A%E4%BD%99%E7%94%A8%E6%88%B7%E7%BB%84%E5%85%B1%E6%9C%89%EF%BC%9Aadm-lp-games-dip"><span class="toc-number">2.</span> <span class="toc-text">需要删除的多余用户组共有：adm lp games dip</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Allows-people-in-group-wheel-to-run-all-commands"><span class="toc-number">2.1.</span> <span class="toc-text">Allows people in group wheel to run all commands</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%BB%E6%8E%89%E4%B8%8B%E9%9D%A2%E4%B8%80%E5%8F%A5%E7%9A%84%E5%89%8D%E9%9D%A2%E7%9A%84%E6%B3%A8%E9%87%8A"><span class="toc-number">3.</span> <span class="toc-text">去掉下面一句的前面的注释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%BF%E5%85%B6%E5%B1%9E%E4%BA%8Eroot%E7%BB%84%EF%BC%88wheel%EF%BC%89%EF%BC%8C%E5%91%BD%E4%BB%A4%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">然后修改用户，使其属于root组（wheel），命令如下：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#usermod-g-root-uusama"><span class="toc-number">5.</span> <span class="toc-text">usermod -g root uusama</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Allow-root-to-run-any-commands-anywhere"><span class="toc-number">5.1.</span> <span class="toc-text">Allow root to run any commands anywhere</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%90%8E%E5%A6%82%E4%B8%8B"><span class="toc-number">6.</span> <span class="toc-text">修改后如下</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        朝闻linux服务器安全配置
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">jimm7</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-20T23:00:09.000Z" class="dt-published" itemprop="datePublished">2023-06-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/linux-security/">linux-security</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/%E6%8A%80%E6%9C%AF%E6%BC%AB%E8%B0%88/" rel="tag">技术漫谈</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <blockquote>
+<p>好不容易买了服务器，如果因为自己的疏忽，被黑客黑掉的话，那真的是太糟糕了！</p>
+</blockquote>
+<p>下面告诉你一些简单的方法提高服务器的安全系数，我的云服务器就是这么配置的，虽然有些麻烦，但是感觉安心一些。</p>
+<p>修改 ssh 登陆配置<br>打开 ssh 配置文件</p>
+<p>vim &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
+<p>#修改以下几项<br>Port 10000<br>#更改SSH端口，最好改为10000以上，别人扫描到端口的机率也会下降。防火墙要开放配置好的端口号，如果是阿里云服务器，你还需要去阿里云后台配置开发相应的端口才可以，否则登不上哦！如果你觉得麻烦，可以不用改</p>
+<p>Protocol 2<br>#禁用版本1协议, 因为其设计缺陷, 很容易使密码被黑掉。</p>
+<p>PermitRootLogin no<br>#尝试任何情况先都不允许 Root 登录. 生效后我们就不能直接以root的方式登录了，我们需要用一个普通的帐号来登录，然后用su来切换到root帐号，注意 su和su - 是有一点小小区别的。关键在于环境变量的不同，su -的环境变量更全面。</p>
+<p>PermitEmptyPasswords no<br>＃禁止空密码登陆。<br>最后需要重启 sshd 服务</p>
+<p>service sshd restart<br>禁止系统响应任何从外部 &#x2F; 内部来的 ping 请求<br>echo “1”&gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;icmp_echo_ignore_all<br>其默认值为 0</p>
+<p>用户管理<br>下面是基本的用户管理命令</p>
+<p>查看用户列表：cat &#x2F;etc&#x2F;passwd<br>查看组列表：cat &#x2F;etc&#x2F;group<br>查看当前登陆用户：who<br>查看用户登陆历史记录：last<br>一般需要删除系统默认的不必要的用户和组，避免被别人用来爆破：</p>
+<p>userdel sync<br>userdel shutdown</p>
+<h1 id="需要删除的多余用户共有：sync-shutdown-halt-uucp-operator-games-gopher"><a href="#需要删除的多余用户共有：sync-shutdown-halt-uucp-operator-games-gopher" class="headerlink" title="需要删除的多余用户共有：sync shutdown halt uucp operator games gopher"></a>需要删除的多余用户共有：sync shutdown halt uucp operator games gopher</h1><p>groupdel adm<br>groupdel games</p>
+<h1 id="需要删除的多余用户组共有：adm-lp-games-dip"><a href="#需要删除的多余用户组共有：adm-lp-games-dip" class="headerlink" title="需要删除的多余用户组共有：adm lp games dip"></a>需要删除的多余用户组共有：adm lp games dip</h1><p>Linux 中的帐号和口令是依据 &#x2F;etc&#x2F;passwd 、&#x2F;etc&#x2F;shadow、 &#x2F;etc&#x2F;group 、&#x2F;etc&#x2F;gshadow 这四个文档的，所以需要更改其权限提高安全性：</p>
+<p>chattr +i &#x2F;etc&#x2F;passwd<br>chattr +i &#x2F;etc&#x2F;shadow<br>chattr +i &#x2F;etc&#x2F;group<br>chattr +i &#x2F;etc&#x2F;gshadow<br>如果还原，把 +i 改成 -i , 再执行一下上面四条命令。</p>
+<p>注：i 属性：不允许对这个文件进行修改，删除或重命名，设定连结也无法写入或新增数据！只有 root 才能设定这个属性。</p>
+<p>创建新用户<br>创建新用户命令：adduser username</p>
+<p>更改用户密码名：passwd username</p>
+<p>个人用户的权限只可以在本 home 下有完整权限，其他目录要看别人授权。而经常需要 root 用户的权限，这时候 sudo 可以化身为 root 来操作。我记得我曾经 sudo 创建了文件，然后发现自己并没有读写权限，因为查看权限是 root 创建的。</p>
+<p>sudoers 只有只读的权限，如果想要修改的话，需要先添加 w 权限：chmod -v u+w &#x2F;etc&#x2F;sudoers 然后就可以添加内容了，在下面的一行下追加新增的用户：wq 保存退出，这时候要记得将写权限收回：chmod -v u-w &#x2F;etc&#x2F;sudoers</p>
+<p>赋予 root 权限<br>方法一：修改 &#x2F;etc&#x2F;sudoers 文件，找到下面一行，把前面的注释（#）去掉</p>
+<h2 id="Allows-people-in-group-wheel-to-run-all-commands"><a href="#Allows-people-in-group-wheel-to-run-all-commands" class="headerlink" title="Allows people in group wheel to run all commands"></a>Allows people in group wheel to run all commands</h2><h1 id="去掉下面一句的前面的注释"><a href="#去掉下面一句的前面的注释" class="headerlink" title="去掉下面一句的前面的注释"></a>去掉下面一句的前面的注释</h1><p>%wheel ALL&#x3D;(ALL) ALL</p>
+<h1 id="然后修改用户，使其属于root组（wheel），命令如下："><a href="#然后修改用户，使其属于root组（wheel），命令如下：" class="headerlink" title="然后修改用户，使其属于root组（wheel），命令如下："></a>然后修改用户，使其属于root组（wheel），命令如下：</h1><h1 id="usermod-g-root-uusama"><a href="#usermod-g-root-uusama" class="headerlink" title="usermod -g root uusama"></a>usermod -g root uusama</h1><p>修改完毕，现在可以用 uusama 帐号登录，然后用命令 su – ，即可获得 root 权限进行操作。</p>
+<p>方法二（推荐）：修改 &#x2F;etc&#x2F;sudoers 文件，找到下面一行，在 root 下面添加一行，如下所示：</p>
+<h2 id="Allow-root-to-run-any-commands-anywhere"><a href="#Allow-root-to-run-any-commands-anywhere" class="headerlink" title="Allow root to run any commands anywhere"></a>Allow root to run any commands anywhere</h2><p>root ALL&#x3D;(ALL) ALL<br>uusama ALL&#x3D;(ALL) ALL<br>修改完毕，现在可以用 uusama 帐号登录，然后用命令 sudo -s ，即可获得 root 权限进行操作。</p>
+<p>方法三：修改 &#x2F;etc&#x2F;passwd 文件，找到如下行，把用户 ID 修改为 0 ，如下所示：<br>uusama:x:500:500:tommy:&#x2F;home&#x2F;uusama:&#x2F;bin&#x2F;bash</p>
+<h1 id="修改后如下"><a href="#修改后如下" class="headerlink" title="修改后如下"></a>修改后如下</h1><p>uusama:x:0:500:tommy:&#x2F;home&#x2F;uusama:&#x2F;bin&#x2F;bash<br>保存，用 uusama 账户登录后，直接获取的就是 root 帐号的权限。</p>
+<blockquote>
+<p>早上很早就起来了，看到微信推送的公众号信息，不错的一篇linux安全文章，但是我觉得可以写的更好一些，后续慢慢补充吧。</p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/KngJmmy">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%88%A0%E9%99%A4%E7%9A%84%E5%A4%9A%E4%BD%99%E7%94%A8%E6%88%B7%E5%85%B1%E6%9C%89%EF%BC%9Async-shutdown-halt-uucp-operator-games-gopher"><span class="toc-number">1.</span> <span class="toc-text">需要删除的多余用户共有：sync shutdown halt uucp operator games gopher</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%88%A0%E9%99%A4%E7%9A%84%E5%A4%9A%E4%BD%99%E7%94%A8%E6%88%B7%E7%BB%84%E5%85%B1%E6%9C%89%EF%BC%9Aadm-lp-games-dip"><span class="toc-number">2.</span> <span class="toc-text">需要删除的多余用户组共有：adm lp games dip</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Allows-people-in-group-wheel-to-run-all-commands"><span class="toc-number">2.1.</span> <span class="toc-text">Allows people in group wheel to run all commands</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%BB%E6%8E%89%E4%B8%8B%E9%9D%A2%E4%B8%80%E5%8F%A5%E7%9A%84%E5%89%8D%E9%9D%A2%E7%9A%84%E6%B3%A8%E9%87%8A"><span class="toc-number">3.</span> <span class="toc-text">去掉下面一句的前面的注释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BD%BF%E5%85%B6%E5%B1%9E%E4%BA%8Eroot%E7%BB%84%EF%BC%88wheel%EF%BC%89%EF%BC%8C%E5%91%BD%E4%BB%A4%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">然后修改用户，使其属于root组（wheel），命令如下：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#usermod-g-root-uusama"><span class="toc-number">5.</span> <span class="toc-text">usermod -g root uusama</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Allow-root-to-run-any-commands-anywhere"><span class="toc-number">5.1.</span> <span class="toc-text">Allow root to run any commands anywhere</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%90%8E%E5%A6%82%E4%B8%8B"><span class="toc-number">6.</span> <span class="toc-text">修改后如下</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&text=朝闻linux服务器安全配置"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&is_video=false&description=朝闻linux服务器安全配置"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=朝闻linux服务器安全配置&body=Check out this article: https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&title=朝闻linux服务器安全配置"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&name=朝闻linux服务器安全配置&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.077.ink/2023/06/21/%E6%9C%9D%E9%97%BBlinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/&t=朝闻linux服务器安全配置"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023-2024
+    jimm7
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/KngJmmy">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
