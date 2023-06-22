@@ -6,7 +6,7 @@
   <link href="https://blog.077.ink/atom.xml" rel="self"/>
   
   <link href="https://blog.077.ink/"/>
-  <updated>2023-06-21T00:47:05.681Z</updated>
+  <updated>2023-06-22T00:48:22.207Z</updated>
   <id>https://blog.077.ink/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo-订阅自己blog的RSS操作</title>
+    <link href="https://blog.077.ink/2023/06/22/hexo-%E8%AE%A2%E9%98%85%E8%87%AA%E5%B7%B1blog%E7%9A%84RSS%E6%93%8D%E4%BD%9C/"/>
+    <id>https://blog.077.ink/2023/06/22/hexo-%E8%AE%A2%E9%98%85%E8%87%AA%E5%B7%B1blog%E7%9A%84RSS%E6%93%8D%E4%BD%9C/</id>
+    <published>2023-06-22T00:22:20.000Z</published>
+    <updated>2023-06-22T00:48:22.207Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;基于hexo-github免费图床的博客搭建后，如何被想要订阅的人看到？&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="自建blog" scheme="https://blog.077.ink/categories/%E8%87%AA%E5%BB%BAblog/"/>
+    
+    
+    <category term="技术漫谈" scheme="https://blog.077.ink/tags/%E6%8A%80%E6%9C%AF%E6%BC%AB%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>AI时代书籍依然重要吗？</title>

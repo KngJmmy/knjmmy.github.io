@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>hexo-订阅自己blog的RSS操作</title>
+      <link href="/2023/06/22/hexo-%E8%AE%A2%E9%98%85%E8%87%AA%E5%B7%B1blog%E7%9A%84RSS%E6%93%8D%E4%BD%9C/"/>
+      <url>/2023/06/22/hexo-%E8%AE%A2%E9%98%85%E8%87%AA%E5%B7%B1blog%E7%9A%84RSS%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="基于hexo-github免费图床的博客搭建后，如何被想要订阅的人看到？"><a href="#基于hexo-github免费图床的博客搭建后，如何被想要订阅的人看到？" class="headerlink" title="基于hexo + github免费图床的博客搭建后，如何被想要订阅的人看到？"></a>基于hexo + github免费图床的博客搭建后，如何被想要订阅的人看到？</h1><p>没错<br>就是使用rss订阅</p><ol><li>在hexo中，需要先安装对应的插件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure></li><li>在配置文件<code>_config.yml</code>配置如下内容<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">feed:</span><br><span class="line">  type: atom</span><br><span class="line">  path: atom.xml</span><br><span class="line">  limit: 20</span><br><span class="line">  hub:</span><br><span class="line">  content: </span><br><span class="line">  content_limit: 140</span><br><span class="line">  content_limit_delim: &#x27; &#x27;</span><br><span class="line">  order_by: -date</span><br><span class="line">  icon: icon.png</span><br><span class="line">  autodiscovery: true</span><br><span class="line">  template: </span><br></pre></td></tr></table></figure>这是一个常见的RSS Feed配置，你可以根据你的需求进行修改。其中：</li></ol><ul><li>type 定义了Feed的类型，可以是 ‘atom’、’rss2’ 或者 ‘json’。</li><li>path 定义了Feed文件的输出路径。</li><li>limit 定义了Feed中的文章数目限制。</li><li>order_by 定义了Feed中文章的排序方式。</li><li>autodiscovery 为 true 时，Hexo 会在 <code>&lt;head&gt;</code> 中插入一个 auto-discovery 标签。</li></ul><ol start="3"><li>清空缓存文件<br><code>hexo clean</code></li></ol><ul><li>清除缓存文件 (db.json) 和已生成的静态文件 (public)。Hexo会在生成新的静态文件之前缓存旧的静态文件，以便更快地生成新的文件。如果你在开发过程中遇到了问题，或者在部署前想确保一切都是最新的，那么可以使用hexo clean命令。</li></ul><ol start="4"><li>重新生成静态文件<br><code>hexo generate</code></li></ol><ul><li>命令会将你的Markdown文件转换为静态HTML文件，以便在网页服务器上托管。生成的静态文件通常位于项目的public目录中。</li></ul><ol start="5"><li>部署网站<br><code>hexo deploy</code></li></ol><ul><li>根据你在Hexo的配置文件<code>_config.yml</code>中设置的部署方法，该命令会自动部署你的博客。比如，如果你设置了GitHub Pages作为部署方法，那么Hexo就会将生成的静态文件推送到你的GitHub仓库。</li></ul><p>步骤3-5可以简写为：<code>hexo clean &amp;&amp; hexo g -d</code></p><ol start="6"><li><p>在rss的订阅软件中，填入以下url来订阅博客<br><code>https://你的博客域名/atom.xml</code></p></li><li><p>刷新你的rss订阅软件，测试是否已经成功订阅，如下图：<br><img src="https://gcore.jsdelivr.net/gh/KngJmmy/blogimages@main/20230622-%E8%AE%A2%E9%98%85rss%E6%B5%8B%E8%AF%95%E6%88%AA%E5%9B%BE.jpeg"></p></li></ol><p>祝端午安康。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 自建blog </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 技术漫谈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AI时代书籍依然重要吗？</title>
       <link href="/2023/06/21/AI%E6%97%B6%E4%BB%A3%E4%B9%A6%E7%B1%8D%E4%BE%9D%E7%84%B6%E9%87%8D%E8%A6%81%E5%90%97%EF%BC%9F/"/>
       <url>/2023/06/21/AI%E6%97%B6%E4%BB%A3%E4%B9%A6%E7%B1%8D%E4%BE%9D%E7%84%B6%E9%87%8D%E8%A6%81%E5%90%97%EF%BC%9F/</url>
