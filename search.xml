@@ -20,7 +20,7 @@
       
         <tags>
             
-            <tag> 娘家孩子们聚会 </tag>
+            <tag> 佛山孩子们聚会 </tag>
             
         </tags>
       
@@ -38,14 +38,14 @@
       
       <categories>
           
-          <category> 自建blog </category>
+          <category> blog </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 技术漫谈 </tag>
+            <tag> hexo-订阅配置 </tag>
             
         </tags>
       
@@ -62,8 +62,6 @@
       
       
       <categories>
-          
-          <category> 在路上 </category>
           
           <category> 随想 </category>
           
@@ -90,14 +88,14 @@
       
       <categories>
           
-          <category> linux-security </category>
+          <category> linux安全 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 技术漫谈 </tag>
+            <tag> linux服务器加固 </tag>
             
         </tags>
       
@@ -115,8 +113,6 @@
       
       <categories>
           
-          <category> 每日印记 </category>
-          
           <category> 随想 </category>
           
       </categories>
@@ -125,8 +121,6 @@
         <tags>
             
             <tag> 咖啡 </tag>
-            
-            <tag> 无序且杂乱着的日子 </tag>
             
         </tags>
       
@@ -144,8 +138,6 @@
       
       <categories>
           
-          <category> 在路上 </category>
-          
           <category> 随想 </category>
           
       </categories>
@@ -153,9 +145,7 @@
       
         <tags>
             
-            <tag> 人工智能 </tag>
-            
-            <tag> 教育 </tag>
+            <tag> AI </tag>
             
         </tags>
       
@@ -173,14 +163,14 @@
       
       <categories>
           
-          <category> 每日印记 </category>
+          <category> 节日 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 节日 </tag>
+            <tag> 咖啡 </tag>
             
         </tags>
       
@@ -198,8 +188,6 @@
       
       <categories>
           
-          <category> 人工智能 </category>
-          
           <category> 随想 </category>
           
       </categories>
@@ -207,9 +195,7 @@
       
         <tags>
             
-            <tag> 重启 </tag>
-            
-            <tag> 拥抱技术 </tag>
+            <tag> AI </tag>
             
         </tags>
       
